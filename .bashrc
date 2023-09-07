@@ -11,7 +11,7 @@ export PAGER='less'
 #export XMODIFIERS=@im=dbus
 #export QT_IM_MODULE=ibus
 
-PS1='\n\[\e[38;5;220;46m\]\t, \d \[\e[0;38;5;35;3m\]\u\[\e[0;38;5;30m\]@\[\e[38;5;31m\]\H \[\e[0m\][ \[\e[38;5;229;1m\]\w \[\e[0m\]] \n \[\e[38;5;160m\]$? \[\e[0;1m\]\\$ \[\e[0m\]'
+PS1='\n\[\e[38;5;220;46m\]\t, \d \[\e[0;38;5;35;3m\]\u\[\e[0;38;5;30m\]@\[\e[38;5;31m\]\H \[\e[0m\][ \[\e[93;1m\]\w \[\e[0m\]] \n \[\e[93m\]$? \[\e[0;1m\]\\$ \[\e[0m\]'
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
