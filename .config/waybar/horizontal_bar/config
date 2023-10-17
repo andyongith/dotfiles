@@ -33,7 +33,8 @@
     // "network#wlo1",
     // "network#eno1"
     "network#wlp3s0",
-    "network#enp2s0"
+    "network#enp0s20f0u1",
+    "network#enp0s20f0u2"
     // "battery"
   ],
   "clock": {
@@ -159,30 +160,41 @@
     // "interface": "wlo1",
     "interface": "wlp3s0",
     "format-icons": [
-      "󰤯",
-      "󰤟",
-      "󰤢",
-      "󰤥",
-      "󰤨"
+      "󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
     ],
     "format-wifi": "{icon} ",
-    // "format-disconnected": "󰤮",
-    "format-disconnected": "",
+    "format-disconnected": "󰤮",
+    // "format-disconnected": "",
     // "format-alt": "{icon} {essid} | 󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz",
     "on-click": "nm-connection-editor",
     "tooltip": true,
     "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n{icon} {essid}\n󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
   },
   // "network#eno1": {
-  "network#enp2s0": {
+  "network#enp0s20f0u1": {
     "interval": 1,
     // "interface": "eno1",
-    "interface": "enp2s0",
+    "interface": "enp0s20f0u1",
     "format-icons": [
-      "󰈀"
+      "󰣺"
     ],
     "format-ethernet": "{icon}",
-    // "format-disconnected": "{icon}",
+    // "format-disconnected": "󰣼",
+    "format-disconnected": "",
+    // "format-alt": "{icon} | 󰢮 {ifname} | 󰩟 {ipaddr}/{cidr}",
+    "on-click": "",
+    "tooltip": true,
+    "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
+  },
+  "network#enp0s20f0u2": {
+    "interval": 1,
+    // "interface": "eno1",
+    "interface": "enp0s20f0u2",
+    "format-icons": [
+      "󰣺"
+    ],
+    "format-ethernet": "{icon}",
+    // "format-disconnected": "󰣼",
     "format-disconnected": "",
     // "format-alt": "{icon} | 󰢮 {ifname} | 󰩟 {ipaddr}/{cidr}",
     "on-click": "",
