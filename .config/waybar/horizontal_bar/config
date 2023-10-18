@@ -8,8 +8,8 @@
   // "margin": "",
   "margin-top": 1,
   "margin-bottom": 0,
-  "margin-left": 2,
-  "margin-right": 2,
+  "margin-left": 8,
+  "margin-right": 8,
   "spacing": 1,
   "gtk-layer-shell": true,
   "modules-left": [
@@ -27,25 +27,26 @@
     // "cpu",
     // "memory",
     // "backlight",
+    "custom/screenshot",
+    "keyboard-state",
     "pulseaudio#microphone",
     "pulseaudio#audio",
     // "bluetooth",
-    // "network#wlo1",
-    // "network#eno1"
     "network#wlp3s0",
     "network#enp0s20f0u1",
-    "network#enp0s20f0u2"
+    "network#enp0s20f0u2",
     // "battery"
+    "custom/powerbutton"
   ],
   "clock": {
     "interval": 1,
     "format": "{:󰥔  %I:%M %p}",
-    "format-alt": "{:󰣆  %A, %B %d | 󰥔  %I:%M %p}",
+    "format-alt": "{:󰥔  %I:%M %p | 󰣆  %A, %B %d}",
     // "on-click": "gnome-calendar",
     "tooltip": true,
     "tooltip-format": "{calendar}",
     "calendar": {
-      "mode": "year",
+      "mode": "month",
       "mode-mon-col": 3,
       "format": {
         "today": "<span color='#0dbc79'>{}</span>"
@@ -113,12 +114,24 @@
   "backlight": {
     "format": "{icon} {percent}%",
     "format-icons": [
-      "󰃟"
+      "󰃟 "
     ],
     "on-scroll-up": "brightnessctl set +5% && ~/.config/dunst/scripts/show_brightness.sh",
     "on-scroll-down": "brightnessctl set 5%- && ~/.config/dunst/scripts/show_brightness.sh",
     "on-click": "",
     "tooltip": false
+  },
+  "keyboard-state": {
+    "capslock": true,
+    "numlock": true,
+    "format": {
+      "capslock": "c{icon} ",
+      "numlock": "n{icon} "
+    },
+    "format-icons":{
+      "locked": "󰔡 ",
+      "unlocked": "󰨙 "
+    }
   },
   "pulseaudio#audio": {
     "format": "{icon} {volume}%",
@@ -154,11 +167,9 @@
     "max-volume": 100,
     "tooltip": false
   },
-  // "network#wlo1": {
   "network#wlp3s0": {
     "interval": 1,
-    // "interface": "wlo1",
-    "interface": "wlp3s0",
+    "interface": "wlp3s0", // name of network interface, this one's for wifi
     "format-icons": [
       "󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
     ],
@@ -166,15 +177,14 @@
     "format-disconnected": "󰤮",
     // "format-disconnected": "",
     // "format-alt": "{icon} {essid} | 󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz",
-    "on-click": "nm-connection-editor",
+    // "on-click": "nm-connection-editor",
+    "on-click": "nmcli device wifi rescan",
     "tooltip": true,
     "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n{icon} {essid}\n󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
   },
-  // "network#eno1": {
   "network#enp0s20f0u1": {
     "interval": 1,
-    // "interface": "eno1",
-    "interface": "enp0s20f0u1",
+    "interface": "enp0s20f0u1", // name of network interface, this one's for 1st usb port
     "format-icons": [
       "󰣺"
     ],
@@ -188,8 +198,7 @@
   },
   "network#enp0s20f0u2": {
     "interval": 1,
-    // "interface": "eno1",
-    "interface": "enp0s20f0u2",
+    "interface": "enp0s20f0u2", // name of network interface, this one's for 2nd usb port
     "format-icons": [
       "󰣺"
     ],
@@ -233,5 +242,14 @@
     ],
     "on-click": "",
     "tooltip": false
+  },
+  "custom/powerbutton": {
+    "format": " ",
+    "on-click": "~/.config/rofi/scripts/powermenu_t1"
+  },
+  "custom/screenshot": {
+    "format": "󰹑  ",
+    // "on-click": "grim -g \"$(slurp)\""
+    "on-click": "grim"
   }
 }

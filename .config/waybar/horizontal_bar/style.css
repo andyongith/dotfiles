@@ -123,6 +123,10 @@ tooltip label {
   animation: colored-gradient 10s ease infinite;
 }
 
+#custom-powerbutton {
+  color: @red;
+}
+
 /* #taskbar button.fullscreen {} */
 
 /* -------------------------------------------------------------------------------- */
