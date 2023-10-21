@@ -11,7 +11,9 @@ export PAGER='less'
 #export XMODIFIERS=@im=dbus
 #export QT_IM_MODULE=ibus
 
-PS1='\[\e[97;40;1m\]\t\[\e[39m\], \[\e[49;97m\]\d \[\e[0;38;5;35;3m\]\u\[\e[0;38;5;30m\]@\[\e[38;5;31m\]\H \[\e[0m\][ \[\e[93;1m\]\w \[\e[0m\]] \n \[\e[93m\]$? \[\e[0;1m\]\\$ \[\e[0m\]'
+#PS1='\[\e[97;40;1m\][󱑌 \t\[\e[39m\],\[\e[49;97m\]\d] [\[\e[0;38;5;35;3m\] \u\[\e[0;38;5;30m\]@\[\e[38;5;31m\]\H \[\e[0m\]] [\[\e[93;1m\] \w \[\e[0m\]] \n \[\e[93m\]$? \[\e[0;1m\]\\$ \[\e[0m\]'
+#export PS1="[ \@,\d] [ \u@\h] [ \w]\n \$? $ "
+export PS1="[ \@,\d] [\[\e[32m\] \u@\h\[\e[0m\]] [\[\e[36m\] \w\[\e[0m\]]\n \[\e[33m\]\$?\[\e[0m\] $ "
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
