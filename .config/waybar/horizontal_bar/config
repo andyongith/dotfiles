@@ -174,7 +174,7 @@
       "󰤯", "󰤟", "󰤢", "󰤥", "󰤨"
     ],
     "format-wifi": "{icon} ",
-    "format-disconnected": "󰤮",
+    "format-disconnected": "󰤮 ",
     // "format-disconnected": "",
     // "format-alt": "{icon} {essid} | 󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz",
     // "on-click": "nm-connection-editor",
@@ -188,7 +188,7 @@
     "format-icons": [
       "󰣺"
     ],
-    "format-ethernet": "{icon}",
+    "format-ethernet": "{icon} ",
     // "format-disconnected": "󰣼",
     "format-disconnected": "",
     // "format-alt": "{icon} | 󰢮 {ifname} | 󰩟 {ipaddr}/{cidr}",
@@ -202,7 +202,7 @@
     "format-icons": [
       "󰣺"
     ],
-    "format-ethernet": "{icon}",
+    "format-ethernet": "{icon} ",
     // "format-disconnected": "󰣼",
     "format-disconnected": "",
     // "format-alt": "{icon} | 󰢮 {ifname} | 󰩟 {ipaddr}/{cidr}",
