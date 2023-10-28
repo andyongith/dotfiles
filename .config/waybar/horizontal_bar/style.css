@@ -131,7 +131,7 @@ tooltip label {
 
 /* -------------------------------------------------------------------------------- */
 
-#custom-launcher,
+#custom-rofi-launcher,
 /* #window, */
 #submap,
 #mode,
@@ -240,4 +240,12 @@ tooltip label {
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
   background-color: @red;
+}
+
+#custom-rofi-launcher,
+#custom-close-button,
+#custom-maximize-button {
+  font-size: 20px;
+  padding: 0px 10px;
+  margin: 0px;
 }

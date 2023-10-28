@@ -13,12 +13,15 @@
   "spacing": 1,
   "gtk-layer-shell": true,
   "modules-left": [
+    "custom/rofi-launcher",
     "clock",
     "hyprland/workspaces",
     "hyprland/submap"
   ],
   "modules-center": [
+    "custom/maximize-button",
     "hyprland/window",
+    "custom/close-button",
     // "sway/workspaces",
     "sway/mode"
   ],
@@ -178,7 +181,8 @@
     // "format-disconnected": "",
     // "format-alt": "{icon} {essid} | 󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz",
     // "on-click": "nm-connection-editor",
-    "on-click": "nmcli device wifi rescan",
+    // "on-click": "nmcli device wifi rescan",
+    "on-click": "~/.config/rofi/scripts/wifi-menu",
     "tooltip": true,
     "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n{icon} {essid}\n󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
   },
@@ -229,27 +233,31 @@
     "format-charging": "󰂄 {capacity}%",
     "format-plugged": "󱘖 {capacity}%",
     "format-icons": [
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰂂",
-      "󰁹"
+      "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
     ],
     "on-click": "",
     "tooltip": false
   },
   "custom/powerbutton": {
     "format": " ",
-    "on-click": "~/.config/rofi/scripts/powermenu_t1"
+    "on-click": "~/.config/rofi/scripts/powermenu"
   },
   "custom/screenshot": {
     "format": "󰹑  ",
     // "on-click": "grim -g \"$(slurp)\""
     "on-click": "grim"
+  },
+  "custom/rofi-launcher": {
+    "format": "󰨝",
+    "on-click": "~/.config/rofi/scripts/launcher"
+  },
+  "custom/close-button": {
+    "format": "󰅙",
+    "on-click": "hyprctl dispatch killactive"
+  },
+  "custom/maximize-button": {
+    "format": "",
+    "on-click": "hyprctl dispatch fullscreen 1"
   }
 }
+

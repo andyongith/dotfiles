@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/andy/.dotfiles/.config/rofi/wifi-menu'
 let g:netrw_dirhist_4='/home/andy/.dotfiles/.config/rofi/launchers/type-3/shared'
 let g:netrw_dirhist_3='/home/andy/.dotfiles/.config/kitty'
 let g:netrw_dirhist_2='/home/andy/.dotfiles/.config/rofi/rofi-iwd-wifi-menu/iwdrofimenu'

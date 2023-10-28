@@ -10,12 +10,12 @@
 ## style-1   style-2   style-3   style-4   style-5
 
 # Current Theme
-dir="$HOME/.config/rofi/powermenu/type-1"
-theme='style-1'
+dir="$HOME/.config/rofi/powermenu"
+theme='style'
 
 # CMDs
 uptime="`uptime -p | sed -e 's/up //g'`"
-host=`hostname`
+host=`cat /etc/hostname`
 
 # Options
 shutdown='Shutdown'

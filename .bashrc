@@ -12,8 +12,19 @@ export PAGER='less'
 #export QT_IM_MODULE=ibus
 
 #PS1='\[\e[97;40;1m\][󱑌 \t\[\e[39m\],\[\e[49;97m\]\d] [\[\e[0;38;5;35;3m\] \u\[\e[0;38;5;30m\]@\[\e[38;5;31m\]\H \[\e[0m\]] [\[\e[93;1m\] \w \[\e[0m\]] \n \[\e[93m\]$? \[\e[0;1m\]\\$ \[\e[0m\]'
-#export PS1="[ \@,\d] [ \u@\h] [ \w]\n \$? $ "
-export PS1="[ \@,\d] [\[\e[32m\] \u@\h\[\e[0m\]] [\[\e[36m\] \w\[\e[0m\]]\n \[\e[33m\]\$?\[\e[0m\] $ "
+
+#export PS1="f \@] [\[\e[32m\] \u@\h\[\e[0m\]] [\[\e[36m\] \w\[\e[0m\]]\n \[\e[33m\]\$?\[\e[0m\] $ "
+
+print_pre_prompt() {
+  PS1L='\[\e[33m\][\[\e[32m\] \u@\h\[\e[0m\]\[\e[33m\]] [\[\e[36m\] \w\[\e[0m\]\[\e[33m\]]'
+  PS1R='\[\e[33m\][\[\e[0m\] \@\[\e[33m\]]\[\e[0m\]'
+  THE_PROMPT='`if(($?==0));then echo "\[\e[32m\] $?"; else echo "\[\e[31m\] $?"; fi`\[\e[33m\] $ \[\e[0m\]'
+
+  echo "${PS1L} ${PS1R}\n${THE_PROMPT}"
+  #echo "$(tput sc; printf "%$(( $(tput cols)-5 ))s" "${PS1R}"; tput rc)${PS1L}\n${THE_PROMPT}"
+}
+
+export PS1=`print_pre_prompt`
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -391,6 +402,12 @@ alias pamac-unlock="sudo rm /var/tmp/pamac/dbs/db.lock"
 
 #moving your personal files and folders from /personal to ~
 alias personal='cp -Rf /personal/* ~'
+
+#tmux with unicode enabled
+alias tmuxu='tmux -u'
+
+#vim session
+alias vims='vim -S'
 
 #create a file called .bashrc-personal and put all your personal aliases
 #in there. They will not be overwritten by skel.
