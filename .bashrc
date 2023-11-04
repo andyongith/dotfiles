@@ -10,6 +10,12 @@ export OSH='/home/andy/.oh-my-bash'
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 OSH_THEME="powerline-multiline"
+#
+# showing different prompt for tty(not gui)
+if [[ ! "$(dirname $(tty))" == "/dev/pts" ]]
+then
+  OSH_THEME="kitsune"
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # OMB_CASE_SENSITIVE="true"
@@ -142,8 +148,15 @@ source "$OSH"/oh-my-bash.sh
 
 
 
+### MANUALLY ADDED#begin
 
-# MY CUSTOM ALIASES
+# showing different prompt for tty(not gui)
+if [[ ! "$(dirname $(tty))" == "/dev/pts" ]]
+then
+  OSH_THEME="edsonarios"
+fi
+
+# my custom aliases
 # 
 #tmux with unicode enabled
 alias tmuxu='tmux -u'
@@ -151,3 +164,4 @@ alias tmuxu='tmux -u'
 #vim session
 alias vims='vim -S'
 
+### MANUALLY ADDED#end
