@@ -18,7 +18,8 @@ export PAGER='less'
 print_pre_prompt() {
   PS1L='\[\e[33m\][\[\e[32m\] \u@\h\[\e[0m\]\[\e[33m\]] [\[\e[36m\] \w\[\e[0m\]\[\e[33m\]]'
   PS1R='\[\e[33m\][\[\e[0m\] \@\[\e[33m\]]\[\e[0m\]'
-  THE_PROMPT='`if(($?==0));then echo "\[\e[32m\] $?"; else echo "\[\e[31m\] $?"; fi`\[\e[33m\] $ \[\e[0m\]'
+  # THE_PROMPT='`if(($?==0));then echo "\[\e[32m\] $?"; else echo "\[\e[31m\] $?"; fi`\[\e[33m\] $ \[\e[0m\]' # it has and issue that return type is only 0 or 1
+  THE_PROMPT='\[\e[33m\] $? $ \[\e[0m\]'
 
   echo "${PS1L} ${PS1R}\n${THE_PROMPT}"
   #echo "$(tput sc; printf "%$(( $(tput cols)-5 ))s" "${PS1R}"; tput rc)${PS1L}\n${THE_PROMPT}"
