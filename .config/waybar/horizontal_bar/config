@@ -19,7 +19,7 @@
     "hyprland/submap"
   ],
   "modules-center": [
-    "custom/maximize-button",
+    // "custom/maximize-button",
     "hyprland/window",
     "custom/close-button",
     // "sway/workspaces",
@@ -78,7 +78,13 @@
   },
   "hyprland/window": {
     "format": " <span font_desc='Iosevka Raven 12'>{:.40}</span> ",
-    "separate-outputs": false
+    "separate-outputs": false,
+    "on-double-click": "hyprctl dispatch fullscreen 1",
+    "on-scroll-up": "hyprctl dispatch cyclenext",
+    "on-scroll-down": "hyprctl dispatch cyclenext prev",
+    "on-click-middle": "hyprctl dispatch togglefloating; hyprctl dispatch centerwindow",
+    "on-double-click-right": "hyprctl keyword bindm , mouse:272, movewindow",
+    "on-click-right": "hyprctl keyword unbind , mouse:272, movewindow"
   },
   "sway/workspaces": {
     "format": "{icon}",
@@ -253,11 +259,15 @@
   },
   "custom/close-button": {
     "format": "󰅙",
-    "on-click": "hyprctl dispatch killactive"
+    "on-click": "hyprctl dispatch killactive",
+    "on-scroll-up": "hyprctl dispatch cyclenext",
+    "on-scroll-down": "hyprctl dispatch cyclenext prev"
   },
   "custom/maximize-button": {
     "format": "",
-    "on-click": "hyprctl dispatch fullscreen 1"
+    "on-click": "hyprctl dispatch fullscreen 1",
+    "on-scroll-up": "hyprctl dispatch cyclenext",
+    "on-scroll-down": "hyprctl dispatch cyclenext prev"
   }
 }
 

@@ -12,7 +12,7 @@ export OSH='/home/andy/.oh-my-bash'
 OSH_THEME="powerline-multiline"
 #
 # showing different prompt for tty(not gui)
-if [[ ! "$(dirname $(tty))" == "/dev/pts" ]]
+if [[ -z $DISPLAY ]]
 then
   OSH_THEME="kitsune"
 fi
@@ -116,7 +116,13 @@ plugins=(
 #      plugins+=(tmux-autoattach)
 #  fi
 
-source "$OSH"/oh-my-bash.sh
+# Sourcing different config if on tty(not gui)
+if [[ -z $DISPLAY ]]
+then
+  source ~/.bashrc-old
+else
+  source "$OSH"/oh-my-bash.sh
+fi
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -148,20 +154,16 @@ source "$OSH"/oh-my-bash.sh
 
 
 
-### MANUALLY ADDED#begin
+# my custom aliases
+alias tmuxu='tmux -u' # tmux with unicode enabled
+alias vims='vim -S'   # easily opening vim sessions
 
-# showing different prompt for tty(not gui)
-if [[ ! "$(dirname $(tty))" == "/dev/pts" ]]
-then
-  OSH_THEME="edsonarios"
+# Adding some extra local binaries/scirpts
+if [ -d "$HOME/.bin" ] ;
+  then PATH="$HOME/.bin:$PATH"
 fi
 
-# my custom aliases
-# 
-#tmux with unicode enabled
-alias tmuxu='tmux -u'
+if [ -d "$HOME/.local/bin" ] ;
+  then PATH="$HOME/.local/bin:$PATH"
+fi
 
-#vim session
-alias vims='vim -S'
-
-### MANUALLY ADDED#end
