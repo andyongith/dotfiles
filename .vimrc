@@ -45,8 +45,11 @@ set termguicolors     " enable true colors support
 let ayucolor="darker" " for darker version of theme
 colorscheme ayu
 
+
+" Yggdroot/indentLine settings
 let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+let g:indentLine_setConceal = 0
 
 
 " use <tab> to trigger completion and navigate to the next complete item

@@ -1,0 +1,41 @@
+
+configuration {
+  modes: [ combi ];
+  combi-modes: [ window, drun, run ];
+}
+
+@theme "gruvbox-dark-soft"
+
+* {
+  background: #181818;
+}
+
+entry {
+  placeholder: "search";
+  cursor: pointer;
+  text-color: #7f8078;
+}
+
+element {
+  orientation: horizontal;
+  children: [ element-icon, element-text ];
+  spacing: 4px;
+}
+
+element-icon {
+  size: 1.5em;
+  background-color: @background;
+}
+
+entry, element-text, element-icon {
+  background-color: @background;
+}
+
+element-text {
+  vertical-align: 0.5;
+  padding: 10px;
+}
+
+element, element-text, element-icon {
+  cursor: pointer;
+}

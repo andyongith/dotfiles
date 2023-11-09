@@ -1,44 +1,31 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
-
-/*****----- Configuration -----*****/
 configuration {
-    show-icons:                 false;
+  hover-select: true;
+  me-select-entry: "";
+  me-accept-entry: [ MousePrimary, MouseDPrimary ];
 }
 
-/*****----- Global Properties -----*****/
-@import                          "shared/colors.rasi"
-@import                          "shared/fonts.rasi"
+* {
+  font: "Iosevka 12";
+  background:     #00000066;
+  background-alt: #10101000;
+  foreground:     #ffffffff;
+  selected:       #62aeefff;
+  active:         #98c379ff;
+  urgent:         #e06b74ff;
+  title-text:     #000000ff;
+}
 
-/*****----- Main Window -----*****/
 window {
-    /* properties for window widget */
-    transparency:                "real";
-    location:                    center;
-    anchor:                      center;
-    fullscreen:                  false;
-    width:                       400px;
-    x-offset:                    0px;
-    y-offset:                    0px;
-
-    /* properties for all widgets */
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @selected;
-    cursor:                      "default";
-    background-color:            @background;
+  width:                       370px;
+  margin:                      0px;
+  padding:                     0px;
+  border:                      0px solid;
+  border-radius:               0px;
+  border-color:                @selected;
+  cursor:                      "default";
+  background-color:            @background;
 }
 
-/*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
     spacing:                     10px;
@@ -48,41 +35,9 @@ mainbox {
     border-radius:               0px;
     border-color:                @selected;
     background-color:            transparent;
-    children:                    [ "inputbar", "message", "listview" ];
+    children:                    [ "message", "listview" ];
 }
 
-/*****----- Inputbar -----*****/
-inputbar {
-    enabled:                     true;
-    spacing:                     10px;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px;
-    border-radius:               0px;
-    border-color:                @selected;
-    background-color:            transparent;
-    text-color:                  @foreground;
-    children:                    [ "textbox-prompt-colon", "prompt"];
-}
-
-textbox-prompt-colon {
-    enabled:                     true;
-    expand:                      false;
-    str:                         " ";
-    padding:                     10px 14px;
-    border-radius:               10px;
-    background-color:            @urgent;
-    text-color:                  @background;
-}
-prompt {
-    enabled:                     true;
-    padding:                     10px;
-    border-radius:               10px;
-    background-color:            @active;
-    text-color:                  @background;
-}
-
-/*****----- Message -----*****/
 message {
     enabled:                     true;
     margin:                      0px;
@@ -111,11 +66,10 @@ error-message {
     text-color:                  @foreground;
 }
 
-/*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     1;
-    lines:                       5;
+    columns:                     2;
+    lines:                       3;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
@@ -135,7 +89,6 @@ listview {
     cursor:                      "default";
 }
 
-/*****----- Elements -----*****/
 element {
     enabled:                     true;
     spacing:                     0px;
@@ -152,8 +105,8 @@ element-text {
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
+    vertical-align:              0.0;
+    horizontal-align:            0.5;
 }
 element selected.normal {
     background-color:            var(selected);

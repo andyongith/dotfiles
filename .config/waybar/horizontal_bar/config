@@ -79,12 +79,11 @@
   "hyprland/window": {
     "format": " <span font_desc='Iosevka Raven 12'>{:.40}</span> ",
     "separate-outputs": false,
-    "on-double-click": "hyprctl dispatch fullscreen 1",
+    "on-click": "hyprctl dispatch fullscreen 1",
+    "on-double-click": "hyprctl dispatch togglefloating; hyprctl dispatch centerwindow",
     "on-scroll-up": "hyprctl dispatch cyclenext",
     "on-scroll-down": "hyprctl dispatch cyclenext prev",
-    "on-click-middle": "hyprctl dispatch togglefloating; hyprctl dispatch centerwindow",
-    "on-double-click-right": "hyprctl keyword bindm , mouse:272, movewindow",
-    "on-click-right": "hyprctl keyword unbind , mouse:272, movewindow"
+    "on-click-right": "~/.config/waybar/horizontal_bar/toggle_hypr_movewindow.sh"
   },
   "sway/workspaces": {
     "format": "{icon}",
@@ -163,6 +162,7 @@
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle && ~/.config/dunst/scripts/show_mute.sh",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +1% && ~/.config/dunst/scripts/show_volume.sh",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -1% && ~/.config/dunst/scripts/show_volume.sh",
+    "on-click-right": "qjackctl",
     "tooltip": true,
     "tooltip-format": "{icon} {desc}"
   },
@@ -173,6 +173,7 @@
     "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle && ~/.config/dunst/scripts/show_mute_microphone.sh",
     "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%",
     "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
+    "on-click-right": "qjackctl",
     "max-volume": 100,
     "tooltip": false
   },
@@ -188,7 +189,8 @@
     // "format-alt": "{icon} {essid} | 󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz",
     // "on-click": "nm-connection-editor",
     // "on-click": "nmcli device wifi rescan",
-    "on-click": "~/.config/rofi/scripts/wifi-menu",
+    "on-click": "",
+    "on-click-right": "nm-connection-editor",
     "tooltip": true,
     "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n{icon} {essid}\n󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
   },
@@ -246,7 +248,7 @@
   },
   "custom/powerbutton": {
     "format": " ",
-    "on-click": "~/.config/rofi/scripts/powermenu"
+    "on-click": "if hyprctl clients | grep -q rofi; then hyprctl dispatch closewindow title:rofi; else $HOME/.config/rofi/scripts/powermenu; fi"
   },
   "custom/screenshot": {
     "format": "󰹑  ",
@@ -255,13 +257,16 @@
   },
   "custom/rofi-launcher": {
     "format": "󰨝",
-    "on-click": "~/.config/rofi/scripts/launcher"
+    "on-click": "if hyprctl clients | grep -q rofi; then hyprctl dispatch closewindow title:rofi; else $HOME/.config/rofi/scripts/launcher; fi"
   },
   "custom/close-button": {
-    "format": "󰅙",
+    "format": "<span foreground=\"{}\">󰅙</span>",
+    "exec": "if [[ $(~/.config/waybar/horizontal_bar/toggle_hypr_movewindow.sh -o) == \"on\" ]]; then echo '#fbc2c2'; else echo white; fi",
+    "interval": 1,
     "on-click": "hyprctl dispatch killactive",
     "on-scroll-up": "hyprctl dispatch cyclenext",
-    "on-scroll-down": "hyprctl dispatch cyclenext prev"
+    "on-scroll-down": "hyprctl dispatch cyclenext prev",
+    "on-click-right": "~/.config/waybar/horizontal_bar/toggle_hypr_movewindow.sh"
   },
   "custom/maximize-button": {
     "format": "",

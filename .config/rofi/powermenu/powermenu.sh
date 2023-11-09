@@ -1,104 +1,57 @@
 #!/usr/bin/env bash
 
-## Author : Aditya Shakya (adi1090x)
-## Github : @adi1090x
-#
-## Rofi   : Power Menu
-#
-## Available Styles
-#
-## style-1   style-2   style-3   style-4   style-5
+scriptpath=$(dirname "$(readlink -f $0)")
 
-# Current Theme
-dir="$HOME/.config/rofi/powermenu"
-theme='style'
-
-# CMDs
-uptime="`uptime -p | sed -e 's/up //g'`"
-host=`cat /etc/hostname`
-
-# Options
-shutdown='Shutdown'
-reboot='Reboot'
-lock='Lock'
-suspend='Suspend'
-logout='Logout'
-cancel='Cancel'
-yes='Yes'
-no='No'
-
-# Rofi CMD
-rofi_cmd() {
-	rofi -dmenu \
-		-p "$host" \
-		-mesg "Uptime: $uptime" \
-		-theme ${dir}/${theme}.rasi
+options="Shutdown|Reboot|Logout|Suspend"
+ask_option() {
+  echo -e "${options}|Cancel" | \
+    rofi -dmenu -sep "|" \
+    -p "Power Menu" \
+    -mesg "Uptime: `uptime -p | sed -e 's/up //g'`" \
+    -theme ${scriptpath}/style.rasi
 }
 
-# Confirmation CMD
-confirm_cmd() {
-	rofi -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 250px;}' \
+ask_confirm() {
+  echo -e "Yes|No" | \
+    rofi -dmenu -sep "|" -mesg "Are you Sure to ${selected}" \
+    -theme-str 'window {location: center; anchor: center; fullscreen: false; width: 250px;}' \
 		-theme-str 'mainbox {children: [ "message", "listview" ];}' \
 		-theme-str 'listview {columns: 2; lines: 1;}' \
 		-theme-str 'element-text {horizontal-align: 0.5;}' \
 		-theme-str 'textbox {horizontal-align: 0.5;}' \
-		-dmenu \
-		-p 'Confirmation' \
-		-mesg 'Are you Sure?' \
-		-theme ${dir}/${theme}.rasi
+    -theme ${scriptpath}/style.rasi
 }
 
-# Ask for confirmation
-confirm_exit() {
-	echo -e "$yes\n$no" | confirm_cmd
-}
 
-# Pass variables to rofi dmenu
-run_rofi() {
-	# echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
-  echo -e "$shutdown\n$reboot\n$logout\n$suspend\n$cancel" | rofi_cmd
-}
+selected=$(ask_option)
+if echo $options | grep -q $selected && [ ${#selected} -gt 0 ]
+then
+  if ! [ $(ask_confirm) == "Yes" ]
+  then
+    echo $selected cancelled
+    exit 1
+  fi
 
-# Execute Command
-run_cmd() {
-	selected="$(confirm_exit)"
-	if [[ "$selected" == "$yes" ]]; then
-		if [[ $1 == '--shutdown' ]]; then
-			systemctl poweroff
-		elif [[ $1 == '--reboot' ]]; then
-			systemctl reboot
-		elif [[ $1 == '--suspend' ]]; then
-			mpc -q pause
-			amixer set Master mute
-			systemctl suspend
-		elif [[ $1 == '--logout' ]]; then
+  case $selected in
+    "Shutdown")
+      echo "Shuting down the computer"
+      systemctl poweroff
+      ;;
+    "Reboot")
+      echo "Rebooting the computer"
+      systemctl reboot
+      ;;
+    "Suspend")
+      echo "Suspending the computer"
+      mpc -q pause
+      amixer set Master mute
+      systemctl suspend
+      ;;
+    "Logout")
+      echo "Logging out"
       hyprctl dispatch exit 1
-		fi
-	else
-		exit 0
-	fi
-}
-
-# Actions
-chosen="$(run_rofi)"
-case ${chosen} in
-    $shutdown)
-		run_cmd --shutdown
-        ;;
-    $reboot)
-		run_cmd --reboot
-        ;;
-    $lock)
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
-			betterlockscreen -l
-		elif [[ -x '/usr/bin/i3lock' ]]; then
-			~/.config/i3/lock.sh
-		fi
-        ;;
-    $suspend)
-		run_cmd --suspend
-        ;;
-    $logout)
-		run_cmd --logout
-        ;;
-esac
+      ;;
+  esac
+else
+  echo Cancelled
+fi

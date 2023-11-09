@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+path="$(dirname $0)"
+path="$path/dark"
+
+all_papers=`ls --color=never -1 ${path}/`
+
+num=`echo -e "$all_papers" | wc -l`
+index=$((RANDOM % num + 1))
+
+paper=`echo -e "$all_papers" | awk "NR==${index}"`
+paper="$path/$paper"
+echo "$paper"
+
+swaybg -i "$paper" &
