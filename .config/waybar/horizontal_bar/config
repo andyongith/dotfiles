@@ -1,80 +1,52 @@
 // vim: ft=jsonc
 {
   "layer": "top",
-  // "output": [],
   "position": "top",
   "height": 12,
-  // "width": 900,
-  // "margin": "",
   "margin-top": 1,
-  "margin-bottom": 0,
-  "margin-left": 8,
-  "margin-right": 8,
   "spacing": 1,
-  "gtk-layer-shell": true,
   "modules-left": [
     "custom/rofi-launcher",
     "clock",
-    "hyprland/workspaces",
-    "hyprland/submap"
+    "hyprland/workspaces"
   ],
   "modules-center": [
-    // "custom/maximize-button",
     "hyprland/window",
-    "custom/close-button",
-    // "sway/workspaces",
-    "sway/mode"
+    "custom/close-button"
   ],
   "modules-right": [
     "tray",
-    // "cpu",
-    // "memory",
-    // "backlight",
+    "keyboard-state#Cap",
+    "keyboard-state#Num",
     "custom/screenshot",
-    "keyboard-state",
     "pulseaudio#microphone",
     "pulseaudio#audio",
-    // "bluetooth",
     "network#wlp3s0",
     "network#enp0s20f0u1",
     "network#enp0s20f0u2",
-    // "battery"
     "custom/powerbutton"
   ],
   "clock": {
     "interval": 1,
     "format": "{:󰥔  %I:%M %p}",
-    "format-alt": "{:󰥔  %I:%M %p | 󰣆  %A, %B %d}",
-    // "on-click": "gnome-calendar",
-    "tooltip": true,
-    "tooltip-format": "{calendar}",
-    "calendar": {
-      "mode": "month",
-      "mode-mon-col": 3,
-      "format": {
-        "today": "<span color='#0dbc79'>{}</span>"
-      }
-    }
+    "format-alt": "{:󰥔  %I:%M:%S %p |   %a,%d %b}",
+    "on-click-right": "if hyprctl clients | grep -q org.gnome.Calendar; then hyprctl dispatch closewindow title:Calendar; else gnome-calendar; fi"
   },
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "1": "1",
-      "2": "2",
+      "1": "1.󰖟 ",
+      "2": "2. ",
       "3": "3",
       "4": "4",
       "5": "5",
       "6": "6",
       "7": "7",
       "8": "8",
-      "9": "9",
+      "9": "9.󰝚 ",
       "default": "1"
     },
     "on-click": "activate"
-  },
-  "hyprland/submap": {
-    "format": "{}",
-    "tooltip": false
   },
   "hyprland/window": {
     "format": " <span font_desc='Iosevka Raven 12'>{:.40}</span> ",
@@ -85,60 +57,30 @@
     "on-scroll-down": "hyprctl dispatch cyclenext prev",
     "on-click-right": "~/.config/waybar/horizontal_bar/toggle_hypr_movewindow.sh"
   },
-  "sway/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "default": "1"
-    },
-    "on-click": "activate"
-  },
-  "sway/mode": {
-    "format": "{}",
-    "tooltip": false
-  },
   "tray": {
     "icon-size": 18,
     "spacing": 10
   },
-  "cpu": {
-    "format": "󰻠 {usage}%",
-    "on-click": "",
-    "tooltip": false
-  },
-  "memory": {
-    "format": "󰍛 {used:0.1f}GB ({percentage}%) / {total:0.1f}GB",
-    "on-click": "",
-    "tooltip": false
-  },
-  "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": [
-      "󰃟 "
-    ],
-    "on-scroll-up": "brightnessctl set +5% && ~/.config/dunst/scripts/show_brightness.sh",
-    "on-scroll-down": "brightnessctl set 5%- && ~/.config/dunst/scripts/show_brightness.sh",
-    "on-click": "",
-    "tooltip": false
-  },
-  "keyboard-state": {
+  "keyboard-state#Cap": {
     "capslock": true,
-    "numlock": true,
+    "numlock": false,
     "format": {
-      "capslock": "c{icon} ",
-      "numlock": "n{icon} "
+      "capslock": "<span foreground=\"#61e5e1\" size=\"16pt\">{icon}</span>"
     },
     "format-icons":{
-      "locked": "󰔡 ",
-      "unlocked": "󰨙 "
+      "locked": "⇪",
+      "unlocked": ""
+    }
+  },
+  "keyboard-state#Num": {
+    "capslock": false,
+    "numlock": true,
+    "format": {
+      "numlock": "<span foreground=\"#61e5e1\" size=\"16pt\">{icon}</span>"
+    },
+    "format-icons":{
+      "locked": "⇭",
+      "unlocked": ""
     }
   },
   "pulseaudio#audio": {
@@ -159,10 +101,10 @@
         "󰕾"
       ]
     },
-    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle && ~/.config/dunst/scripts/show_mute.sh",
-    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +1% && ~/.config/dunst/scripts/show_volume.sh",
-    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -1% && ~/.config/dunst/scripts/show_volume.sh",
-    "on-click-right": "qjackctl",
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +1%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -1%",
+    "on-click-right": "if hyprctl clients | grep -q QjackCtl; then hyprctl dispatch closewindow title:\"JACK Audio Connection Kit\"; else qjackctl; fi",
     "tooltip": true,
     "tooltip-format": "{icon} {desc}"
   },
@@ -170,10 +112,10 @@
     "format": "{format_source}",
     "format-source": "󰍬 {volume}%",
     "format-source-muted": "󰍭 {volume}%",
-    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle && ~/.config/dunst/scripts/show_mute_microphone.sh",
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
     "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%",
     "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
-    "on-click-right": "qjackctl",
+    "on-click-right": "if hyprctl clients | grep -q QjackCtl; then hyprctl dispatch closewindow title:\"JACK Audio Connection Kit\"; else qjackctl; fi",
     "max-volume": 100,
     "tooltip": false
   },
@@ -185,12 +127,8 @@
     ],
     "format-wifi": "{icon} ",
     "format-disconnected": "󰤮 ",
-    // "format-disconnected": "",
-    // "format-alt": "{icon} {essid} | 󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz",
-    // "on-click": "nm-connection-editor",
-    // "on-click": "nmcli device wifi rescan",
     "on-click": "",
-    "on-click-right": "nm-connection-editor",
+    "on-click-right": "if hyprctl clients | grep -q nm-connection-editor; then hyprctl dispatch closewindow title:\"Network Connections\"; else nm-connection-editor; fi",
     "tooltip": true,
     "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n{icon} {essid}\n󱑽 {signalStrength}% {signaldBm} dBm {frequency} MHz\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
   },
@@ -203,7 +141,6 @@
     "format-ethernet": "{icon} ",
     // "format-disconnected": "󰣼",
     "format-disconnected": "",
-    // "format-alt": "{icon} | 󰢮 {ifname} | 󰩟 {ipaddr}/{cidr}",
     "on-click": "",
     "tooltip": true,
     "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
@@ -217,7 +154,6 @@
     "format-ethernet": "{icon} ",
     // "format-disconnected": "󰣼",
     "format-disconnected": "",
-    // "format-alt": "{icon} | 󰢮 {ifname} | 󰩟 {ipaddr}/{cidr}",
     "on-click": "",
     "tooltip": true,
     "tooltip-format": "󰢮 {ifname}\n󰩟 {ipaddr}/{cidr}\n󰞒 {bandwidthDownBytes}\n󰞕 {bandwidthUpBytes}"
@@ -232,32 +168,18 @@
     "on-click": "",
     "tooltip": true
   },
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󱘖 {capacity}%",
-    "format-icons": [
-      "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
-    ],
-    "on-click": "",
-    "tooltip": false
-  },
   "custom/powerbutton": {
-    "format": " ",
-    "on-click": "if hyprctl clients | grep -q rofi; then hyprctl dispatch closewindow title:rofi; else $HOME/.config/rofi/scripts/powermenu; fi"
+    "format": "  ",
+    "on-click": "$HOME/.config/rofi/scripts/powermenu"
   },
   "custom/screenshot": {
     "format": "󰹑  ",
-    // "on-click": "grim -g \"$(slurp)\""
-    "on-click": "grim"
+    "on-click": "grim",
+    "on-click-right-release": "grim -g \"$(slurp)\""
   },
   "custom/rofi-launcher": {
-    "format": "󰨝",
-    "on-click": "if hyprctl clients | grep -q rofi; then hyprctl dispatch closewindow title:rofi; else $HOME/.config/rofi/scripts/launcher; fi"
+    "format": "",
+    "on-click": "$HOME/.config/rofi/scripts/launcher"
   },
   "custom/close-button": {
     "format": "<span foreground=\"{}\">󰅙</span>",
@@ -267,12 +189,6 @@
     "on-scroll-up": "hyprctl dispatch cyclenext",
     "on-scroll-down": "hyprctl dispatch cyclenext prev",
     "on-click-right": "~/.config/waybar/horizontal_bar/toggle_hypr_movewindow.sh"
-  },
-  "custom/maximize-button": {
-    "format": "",
-    "on-click": "hyprctl dispatch fullscreen 1",
-    "on-scroll-up": "hyprctl dispatch cyclenext",
-    "on-scroll-down": "hyprctl dispatch cyclenext prev"
   }
 }
 

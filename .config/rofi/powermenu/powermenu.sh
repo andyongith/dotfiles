@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+if hyprctl clients | grep -q rofi;
+then
+  if hyprctl clients | grep rofi | grep -q Power
+  then
+    hyprctl dispatch closewindow title:rofi
+    exit 0
+  else
+    hyprctl dispatch closewindow title:rofi
+  fi
+fi
+
 scriptpath=$(dirname "$(readlink -f $0)")
 
 options="Shutdown|Reboot|Logout|Suspend"
@@ -7,7 +18,7 @@ ask_option() {
   echo -e "${options}|Cancel" | \
     rofi -dmenu -sep "|" \
     -p "Power Menu" \
-    -mesg "Uptime: `uptime -p | sed -e 's/up //g'`" \
+    -mesg "`uptime -p | sed -e 's/up/Uptime:/g' | sed -e 's/,//g'`" \
     -theme ${scriptpath}/style.rasi
 }
 

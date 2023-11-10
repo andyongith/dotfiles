@@ -154,6 +154,9 @@ fi
 
 
 
+# my custom environment variables
+export GRIM_DEFAULT_DIR=$HOME/Pictures/Screenshots/
+
 # my custom aliases
 alias tmuxu='tmux -u' # tmux with unicode enabled
 alias vims='vim -S'   # easily opening vim sessions
