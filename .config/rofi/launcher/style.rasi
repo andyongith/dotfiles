@@ -31,8 +31,8 @@ window {
   transparency:                "real";
   location:                    center;
   anchor:                      center;
-  fullscreen:                  true;
-  width:                       1000px;
+  fullscreen:                  false;
+  width:                       1100px;
   x-offset:                    0px;
   y-offset:                    0px;
 
@@ -95,7 +95,7 @@ entry {
 listview {
   enabled:                     true;
   columns:                     5;
-  lines:                       1;
+  lines:                       3;
   cycle:                       true;
   dynamic:                     true;
   scrollbar:                   false;

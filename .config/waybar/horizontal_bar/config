@@ -46,6 +46,8 @@
       "9": "9.󰝚 ",
       "default": "1"
     },
+    "active-only": false,
+    "all-outputs": true,
     "on-click": "activate"
   },
   "hyprland/window": {

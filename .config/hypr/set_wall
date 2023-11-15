@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+wall_dir="$HOME/Wallpapers"
+theme="dark"
+
+if [ -f "$wall_dir/default" ]
+then
+  echo "-----$wall_dir/default-----"
+  swaybg -i "$wall_dir/default"
+elif [ -d "$wall_dir/$theme" ]
+then
+  all_papers=`ls --color=never -1 ${wall_dir}/`
+
+  num=`echo -e "$all_papers" | wc -l`
+  index=$((RANDOM % num + 1))
+
+  paper=`echo -e "$all_papers" | awk "NR==${index}"`
+  paper="$wall_dir/$paper"
+  echo "$paper"
+
+  swaybg -i "$paper"
+elif [ -f $default_paper ] 
+then
+  swaybg -i $default_paper
+else
+  swaybg -m solid_color -c "#222a2c"
+fi
