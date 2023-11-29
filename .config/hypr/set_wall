@@ -2,6 +2,7 @@
 
 wall_dir="$HOME/Wallpapers"
 theme="dark"
+default_paper="$HOME/.config/hypr/def_wallpaper"
 
 if [ -f "$wall_dir/default" ]
 then

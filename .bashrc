@@ -160,7 +160,7 @@ export GRIM_DEFAULT_DIR=$HOME/Pictures/Screenshots/
 # my custom aliases
 alias tmuxu='tmux -u' # tmux with unicode enabled
 alias vims='vim -S'   # easily opening vim sessions
-alias lsblk-o='lsblk -o NAME,LABEL,FSTYPE,UUID,SIZE,FSAVAIL,FSUSE%,MOUNTPOINTS'
+alias lsblk-o='lsblk -o NAME,LABEL,FSTYPE,FSVER,UUID,SIZE,FSAVAIL,FSUSE%,MOUNTPOINTS'
 
 # Adding some extra local binaries/scirpts
 if [ -d "$HOME/.bin" ] ;
