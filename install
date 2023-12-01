@@ -1,0 +1,80 @@
+#!/usr/bin/bash
+
+## Installing dependencies
+sudo pacman -Syy
+
+sudo pacman -S --needed flatpak git grim hyprland kitty nodejs npm \
+  pamixer pavucontrol pipewire pipewire-alsa pipewire-pulse \
+  python-pillow ranger rofi slurp swaybg tmux vi vim waybar yarn tldr 
+
+flatpak install it.mijorus.smile
+
+sudo pacman -S --needed noto-fonts noto-fonts-emoji otf-aurulent-nerd \
+  otf-codenewroman-nerd otf-comicshanns-nerd otf-commit-mono-nerd \
+  otf-droid-nerd otf-firamono-nerd otf-geist-mono-nerd otf-hasklig-nerd \
+  otf-hermit-nerd otf-monaspace-nerd otf-opendyslexic-nerd \
+  otf-overpass-nerd ttf-0xproto-nerd ttf-3270-nerd ttf-agave-nerd \
+  ttf-anonymouspro-nerd ttf-arimo-nerd ttf-bigblueterminal-nerd \
+  ttf-bitstream-vera-mono-nerd ttf-cascadia-code-nerd \
+  ttf-cascadia-mono-nerd ttf-cousine-nerd ttf-d2coding-nerd \
+  ttf-daddytime-mono-nerd ttf-dejavu-nerd ttf-envycoder-nerd \
+  ttf-fantasque-nerd ttf-firacode-nerd ttf-go-nerd ttf-hack-nerd \
+  ttf-heavydata-nerd ttf-iawriter-nerd ttf-ibmplex-mono-nerd \
+  ttf-inconsolata-go-nerd ttf-inconsolata-lgc-nerd ttf-inconsolata-nerd \
+  ttf-intone-nerd ttf-iosevka-nerd ttf-iosevkaterm-nerd \
+  ttf-jetbrains-mono-nerd ttf-lekton-nerd ttf-liberation-mono-nerd \
+  ttf-lilex-nerd ttf-martian-mono-nerd ttf-meslo-nerd ttf-monofur-nerd \
+  ttf-monoid-nerd ttf-mononoki-nerd ttf-mplus-nerd \
+  ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-mono ttf-noto-nerd \
+  ttf-profont-nerd ttf-proggyclean-nerd ttf-roboto-mono-nerd \
+  ttf-sharetech-mono-nerd ttf-sourcecodepro-nerd ttf-space-mono-nerd \
+  ttf-terminus-nerd ttf-tinos-nerd ttf-ubuntu-mono-nerd ttf-ubuntu-nerd \
+  ttf-victor-mono-nerd
+
+
+## Deleting already existing directories
+cd $HOME
+rm -rf .config/dunst .config/eww .config/hypr .config/kitty \
+  .config/ranger .config/rofi .config/waybar
+
+
+## Creating soft links
+cd $HOME
+#ln -sf dotfiles/.gitconfig
+ln -sf dotfiles/.tmux.conf
+ln -sf dotfiles/.vimrc
+#ln -sf dotfiles/.tmux
+ln -sf dotfiles/.vim
+
+if [ ! -d $HOME/.config ]; then
+  mkdir $HOME/.config
+fi
+cd $HOME/.config
+ln -sf ../dotfiles/.config/dunst
+ln -sf ../dotfiles/.config/eww
+ln -sf ../dotfiles/.config/hypr
+ln -sf ../dotfiles/.config/kitty
+ln -sf ../dotfiles/.config/ranger
+ln -sf ../dotfiles/.config/rofi
+ln -sf ../dotfiles/.config/waybar
+
+
+## Installing others
+
+cd $HOME
+if [ ! -d .oh-my-bash ]; then
+  dotfiles/install-oh-my-bash.sh --unattended
+  ln -sf dotfiles/.bashrc
+  ln -sf dotfiles/.bashrc-old
+fi
+
+if [ ! -d .tmux/plugins/tpm ]; then
+  git clone https://github.com/tmux-plugins/tpm .tmux/plugins/tpm
+  .tmux/plugins/tpm/bindings/install_plugins
+fi
+
+#vim-plugins
+vim +PlugInstall +qall
+cd .vim/plugged/coc.nvim
+yarn
+vim "+CocInstall coc-clangd coc-css coc-sh coc-git coc-html coc-json coc-lua coc-python coc-sql"
