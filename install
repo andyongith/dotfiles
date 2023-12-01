@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 ## Installing dependencies
-sudo pacman -Syy
+sudo pacman -Sy
 
 sudo pacman -S --needed flatpak git grim hyprland kitty nodejs npm \
   pamixer pavucontrol pipewire pipewire-alsa pipewire-pulse \
@@ -58,7 +58,7 @@ ln -sf ../dotfiles/.config/rofi
 ln -sf ../dotfiles/.config/waybar
 
 
-## Installing others
+## Installing Others
 
 cd $HOME
 if [ ! -d .oh-my-bash ]; then
@@ -72,8 +72,21 @@ if [ ! -d .tmux/plugins/tpm ]; then
   .tmux/plugins/tpm/bindings/install_plugins
 fi
 
-#vim-plugins
 vim +PlugInstall +qall
 cd .vim/plugged/coc.nvim
 yarn
-vim "+CocInstall coc-clangd coc-css coc-sh coc-git coc-html coc-json coc-lua coc-python coc-sql"
+vim "+CocInstall coc-clangd coc-css coc-sh coc-git coc-html coc-json coc-lua coc-python coc-sql" +qall
+
+if which yay; then
+  echo "yay is already installed"
+else
+  git clone https://aur.archlinux.org/yay.git /opt/
+  cd yay
+  sudo makepkg -si
+fi
+
+sudo pacman -S --needed bitwarden discord firefox gparted gthumb \
+  telegram-desktop thunar vlc man-db bash-completion
+
+yay -S --needed brave-bin
+yay -S --needed ventoy-bin

@@ -1,0 +1,43 @@
+
+First of all connect to Internet with however method you prefer.
+
+Create two partitions on the disk
+* esp partition -- fat32 -- 1G -- mount_point: /mnt/boot/efi
+* root partition -- ext4 -- (as much as you want) -- mount_point: /mnt
+
+Next uncomment(or add if doesn't exist) these lines in /etc/pacman.conf
+  * Color
+  * VerbosePkgLists
+  * ParallelDownloads = 5
+  * ILoveCandy
+
+Now, install the system
+`pacstrap /mnt/ base base-devel linux linux-lts linux-firmware efibootmgr grub os-prober exfat-utils networkmanager`
+  * base base-devel                => all GNU programs that make up the system
+  * linux linux-lts linux-firmware => self explainatory
+  * efibootmgr grub os-prober      => self explainatory
+  * exfat-utils                    => utilities used to us exfat file-system(because I use it)
+  * networkmanager                 => self explainatory
+
+Entering into the half installed system
+`arch-chroot /mnt`
+
+Setting up time-zone
+`ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime`
+
+Now, to set-up locale, uncomment the line with "en_IN" in the file /etc/locale.gen
+then run command,
+`locale-gen`
+`LANG=en_IN.UTF-8`
+
+Next, to install grub, first uncomment the "GRUB_DISABLE_OS_PROBER=false"in the file /etc/default/grub(so that it automatically detects other OS's, if available)
+then run commands
+`grub-install --bootloader-id=Arch --efi-directory=/boot/efi/ --target=x86_64-efi`
+`grub-mkconfig -o /boot/grub/grub.cfg`
+
+Finally, add a root password
+`passwd`
+
+Just one more, uncomment the lines "%wheel ALL=(ALL:ALL) ALL" and "%sudo ALL=(ALL:ALL) ALL" in the file /etc/sudoers, so that other users from wheel or sudo group can run commands as root
+
+Now, you're good to go with a single-user system
