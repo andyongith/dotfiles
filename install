@@ -43,7 +43,6 @@ cd $HOME
 #ln -sf dotfiles/.gitconfig
 ln -sf dotfiles/.tmux.conf
 ln -sf dotfiles/.vimrc
-#ln -sf dotfiles/.tmux
 ln -sf dotfiles/.vim
 
 if [ ! -d $HOME/.config ]; then
