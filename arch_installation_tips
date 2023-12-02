@@ -19,6 +19,9 @@ Now, install the system
   * exfat-utils                    => utilities used to us exfat file-system(because I use it)
   * networkmanager                 => self explainatory
 
+Add the fstab file
+`genfstab -U /mnt >> /mnt/etc/fstab`
+
 Entering into the half installed system
 `arch-chroot /mnt`
 

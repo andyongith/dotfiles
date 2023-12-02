@@ -67,22 +67,25 @@ if [ ! -d .oh-my-bash ]; then
   ln -sf dotfiles/.bashrc-old
 fi
 
+cd $HOME
 if [ ! -d .tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm .tmux/plugins/tpm
   .tmux/plugins/tpm/bindings/install_plugins
 fi
 
+cd $HOME
 vim +PlugInstall +qall
 cd .vim/plugged/coc.nvim
 yarn
 vim "+CocInstall coc-clangd coc-css coc-sh coc-git coc-html coc-json coc-lua coc-python coc-sql" +qall
 
+cd $HOME
 if which yay; then
   echo "yay is already installed"
 else
-  git clone https://aur.archlinux.org/yay.git /opt/
-  cd yay
-  sudo makepkg -si
+  git clone https://aur.archlinux.org/yay.git yay-git
+  cd yay-git
+  makepkg -si
 fi
 
 sudo pacman -S --needed bitwarden discord firefox gparted gthumb \
