@@ -1,3 +1,4 @@
+INSTALLATION
 
 First of all connect to Internet with however method you prefer.
 
@@ -12,18 +13,22 @@ Next uncomment(or add if doesn't exist) these lines in /etc/pacman.conf
   * ILoveCandy
 
 Now, install the system
-`pacstrap /mnt/ base base-devel linux linux-lts linux-firmware efibootmgr grub os-prober exfat-utils networkmanager`
+`pacstrap /mnt/ base base-devel linux linux-lts linux-firmware efibootmgr grub os-prober exfat-utils networkmanager vi`
   * base base-devel                => all GNU programs that make up the system
   * linux linux-lts linux-firmware => self explainatory
   * efibootmgr grub os-prober      => self explainatory
   * exfat-utils                    => utilities used to us exfat file-system(because I use it)
   * networkmanager                 => self explainatory
+  * vi                             => a text editor
 
 Add the fstab file
 `genfstab -U /mnt >> /mnt/etc/fstab`
 
 Entering into the half installed system
 `arch-chroot /mnt`
+
+Enable Internet
+`systemctl enable NetworkManager`
 
 Setting up time-zone
 `ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime`
@@ -41,6 +46,25 @@ then run commands
 Finally, add a root password
 `passwd`
 
-Just one more, uncomment the lines "%wheel ALL=(ALL:ALL) ALL" and "%sudo ALL=(ALL:ALL) ALL" in the file /etc/sudoers, so that other users from wheel or sudo group can run commands as root
+Just one more, uncomment the lines "%wheel ALL=(ALL:ALL) ALL" and "%sudo ALL=(ALL:ALL) ALL" in the file /etc/sudoers(using `visudo` command), so that other users from wheel or sudo group can run commands as root
 
 Now, you're good to go with a single-user system
+
+------------------------------------------------------
+CHECKLIST
+
+# connecting to internet
+# partition disk and mount the partition
+# pacman config
+# installing essential packages
+  * base base-devel linux linux-lts linux-firmware grub efibootmgr os-prober
+    networkmanager exfat-utils vi
+# fstab
+# chroot
+# NetworkManager.service
+# time-zone locale
+# grub
+# passwd
+# visudo(wheel and sudo group)
+# adding other users
+# installing other packages, building up gui, sound, dotfiles etc.

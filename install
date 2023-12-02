@@ -5,7 +5,8 @@ sudo pacman -Sy
 
 sudo pacman -S --needed flatpak git grim hyprland kitty nodejs npm \
   pamixer pavucontrol pipewire pipewire-alsa pipewire-pulse \
-  python-pillow ranger rofi slurp swaybg tmux vi vim waybar yarn tldr 
+  python-pillow ranger rofi slurp swaybg tmux vi vim waybar yarn tldr \
+  qt6 gtk4
 
 flatpak install it.mijorus.smile
 
