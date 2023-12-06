@@ -3,14 +3,12 @@
 ## Installing dependencies
 sudo pacman -Sy
 
-sudo pacman -S --needed flatpak git grim hyprland kitty nodejs npm \
+sudo pacman -S --needed --noconfirm grim hyprland kitty nodejs npm \
   pamixer pavucontrol pipewire pipewire-alsa pipewire-pulse \
   python-pillow ranger rofi slurp swaybg tmux vi vim waybar yarn tldr \
-  qt6 gtk4
+  qt6 gtk4 htop neofetch github-cli flatpak git
 
-flatpak install it.mijorus.smile
-
-sudo pacman -S --needed noto-fonts noto-fonts-emoji otf-aurulent-nerd \
+sudo pacman -S --needed --noconfirm noto-fonts-emoji otf-aurulent-nerd \
   otf-codenewroman-nerd otf-comicshanns-nerd otf-commit-mono-nerd \
   otf-droid-nerd otf-firamono-nerd otf-geist-mono-nerd otf-hasklig-nerd \
   otf-hermit-nerd otf-monaspace-nerd otf-opendyslexic-nerd \
@@ -30,7 +28,9 @@ sudo pacman -S --needed noto-fonts noto-fonts-emoji otf-aurulent-nerd \
   ttf-profont-nerd ttf-proggyclean-nerd ttf-roboto-mono-nerd \
   ttf-sharetech-mono-nerd ttf-sourcecodepro-nerd ttf-space-mono-nerd \
   ttf-terminus-nerd ttf-tinos-nerd ttf-ubuntu-mono-nerd ttf-ubuntu-nerd \
-  ttf-victor-mono-nerd
+  ttf-victor-mono-nerd noto-fonts
+
+flatpak install --assumeyes it.mijorus.smile
 
 
 ## Deleting already existing directories
@@ -89,8 +89,8 @@ else
   makepkg -si
 fi
 
-sudo pacman -S --needed bitwarden discord firefox gparted gthumb \
-  telegram-desktop thunar vlc man-db bash-completion
+sudo pacman -S --needed --noconfirm discord firefox gparted gthumb \
+  telegram-desktop thunar vlc man-db bash-completion bitwarden
 
-yay -S --needed brave-bin
-yay -S --needed ventoy-bin
+yay -S --needed --noconfirm brave-bin
+yay -S --needed --noconfirm ventoy-bin
