@@ -13,16 +13,22 @@ Next uncomment(or add if doesn't exist) these lines in /etc/pacman.conf
   * ILoveCandy
 
 Now, install the system
-`pacstrap /mnt/ base base-devel linux linux-lts linux-firmware efibootmgr grub os-prober exfat-utils networkmanager vi`
-  * base base-devel                => all GNU programs that make up the system
-  * linux linux-lts linux-firmware => self explainatory
-  * efibootmgr grub os-prober      => self explainatory
-  * exfat-utils                    => utilities used to us exfat file-system(because I use it)
-  * networkmanager                 => self explainatory
-  * vi                             => a text editor
+`pacstrap /mnt/ base base-devel linux-lts linux-firmware linux-lts-headers efibootmgr grub os-prober exfat-utils networkmanager vi reflector`
+  * base base-devel                            => all GNU programs that make up the system
+  * linux-lts linux-firmware linux-lts-headers => self explainatory(I don't use linux anymore)
+  * efibootmgr grub os-prober                  => self explainatory
+  * exfat-utils                                => utilities used to us exfat file-system(because I use it)
+  * networkmanager                             => self explainatory
+  * vi                                         => a text editor
+  * reflector                                  => for updating mirrorlist
 
 Add the fstab file
 `genfstab -U /mnt >> /mnt/etc/fstab`
+
+update pacman mirrorlist
+`reflector --latest 5 --sort rate --save /etc/pacman.d/mirrorlist`
+
+now, modify the pacman.conf file like before
 
 Entering into the half installed system
 `arch-chroot /mnt`
@@ -55,13 +61,14 @@ CHECKLIST
 
 # connecting to internet
 # partition disk and mount the partition
-# pacman config
+# pacman.conf
 # installing essential packages
-  * base base-devel linux linux-lts linux-firmware grub efibootmgr os-prober
+  * base base-devel linux-lts linux-firmware linux-lts-headers grub efibootmgr os-prober
     networkmanager exfat-utils vi
 # fstab
 # chroot
 # NetworkManager.service
+# pacman.conf, reflector
 # time-zone locale
 # grub
 # passwd

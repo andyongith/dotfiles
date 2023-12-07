@@ -30,8 +30,6 @@ sudo pacman -S --needed --noconfirm noto-fonts-emoji otf-aurulent-nerd \
   ttf-terminus-nerd ttf-tinos-nerd ttf-ubuntu-mono-nerd ttf-ubuntu-nerd \
   ttf-victor-mono-nerd noto-fonts
 
-flatpak install --assumeyes it.mijorus.smile
-
 
 ## Deleting already existing directories
 cd $HOME
@@ -68,6 +66,8 @@ if [ ! -d .oh-my-bash ]; then
   ln -sf dotfiles/.bashrc-old
 fi
 
+source .bashrc
+
 cd $HOME
 if [ ! -d .tmux/plugins/tpm ]; then
   git clone https://github.com/tmux-plugins/tpm .tmux/plugins/tpm
@@ -75,10 +75,10 @@ if [ ! -d .tmux/plugins/tpm ]; then
 fi
 
 cd $HOME
-vim +PlugInstall +qall
+echo -e "\n" | vim +PlugInstall +qall
 cd .vim/plugged/coc.nvim
 yarn
-vim "+CocInstall coc-clangd coc-css coc-sh coc-git coc-html coc-json coc-lua coc-python coc-sql" +qall
+echo -e "\n" | vim "+CocInstall coc-clangd coc-css coc-sh coc-git coc-html coc-json coc-lua coc-python coc-sql" +qall
 
 cd $HOME
 if which yay; then
@@ -86,11 +86,14 @@ if which yay; then
 else
   git clone https://aur.archlinux.org/yay.git yay-git
   cd yay-git
-  makepkg -si
+  makepkg -si --noconfirm
 fi
 
 sudo pacman -S --needed --noconfirm discord firefox gparted gthumb \
-  telegram-desktop thunar vlc man-db bash-completion bitwarden
+  telegram-desktop thunar vlc man-db bash-completion bitwarden \
+  virtualbox
 
 yay -S --needed --noconfirm brave-bin
 yay -S --needed --noconfirm ventoy-bin
+
+flatpak install --assumeyes it.mijorus.smile
